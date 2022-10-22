@@ -1,6 +1,7 @@
 import 'package:pokedex/core/core.dart';
+import 'package:pokedex/core/extentions/pokemon_respons_extantion.dart';
 import 'package:pokedex/pages/home/provider/home_state.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final homeProvider =
     StateNotifierProvider<HomeProvider, HomeState>((ref)
@@ -13,9 +14,12 @@ class HomeProvider extends StateNotifier<HomeState> {
 
   void getPokemonsList() async {
     try {
+      state = state.Update(status: HomeStatus.loadMore);
+
       PokemonResponse response =
           await PokedexApi().getPokemonList(offset: state.offset);
-      state = state.Update(data: response);
+
+      state = state.Update(data: state.data.append(response) , status: HomeStatus.success, offset: state.offset + limit);
     } catch (e) {
       state = state.Update(
         errorMsg: e.toString(),

@@ -1,6 +1,7 @@
 import 'package:pokedex/core/core.dart';
 
 enum HomeStatus {
+  initial,
   loading,
   error,
   success,
@@ -15,7 +16,7 @@ class HomeState {
   final String errorMsg;
 
   HomeState({
-    this.status = HomeStatus.loading,
+    this.status = HomeStatus.initial,
     this.data = const PokemonResponse(),
     this.offset = 0,
     this.errorMsg = '',

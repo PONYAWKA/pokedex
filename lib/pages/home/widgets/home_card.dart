@@ -25,6 +25,9 @@ class HomeCard extends StatelessWidget {
                           child: CircularProgressIndicator(
                         color: Colors.greenAccent,
                       )),
+                      errorWidget: (_, url, e) => const Center(
+                        child: Icon(Icons.image_not_supported),
+                      ),
                     ))),
             Text(
               '${pokemon.name?.capitalize()}',

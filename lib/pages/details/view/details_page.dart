@@ -25,7 +25,12 @@ class DetailsPage extends ConsumerWidget {
         SliverToBoxAdapter(
           child: Hero(
               tag: "${pokemon.name}",
-              child: CachedNetworkImage(imageUrl: pokemon.getImageUrl)),
+              child: CachedNetworkImage(
+                imageUrl: pokemon.getImageUrl,
+              errorWidget: (_, url,e) => const Center(
+                  child: Icon(Icons.image_not_supported),
+                ),
+              )),
         ),
         details.when(data: (data) {
           return SliverPadding(
@@ -53,7 +58,8 @@ class DetailsPage extends ConsumerWidget {
                         height: 80,
                         width: 160,
                         child: Card(
-                        shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
                           color: Colors.greenAccent,
                           child: Center(
                             child: Text(
@@ -70,7 +76,8 @@ class DetailsPage extends ConsumerWidget {
                         height: 80,
                         width: 160,
                         child: Card(
-                          shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
                           color: Colors.greenAccent,
                           child: Center(
                             child: Text(

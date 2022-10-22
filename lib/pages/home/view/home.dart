@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:pokedex/pages/home/provider/home_provider.dart';
 import 'package:pokedex/pages/home/provider/home_state.dart';
 import 'package:pokedex/pages/home/widgets/home_card.dart';
@@ -31,6 +32,7 @@ class Home extends ConsumerWidget {
               background: Image.asset('lib/asset/images/Logo.png'),
             ),
             floating: true,
+            backgroundColor: Colors.green,
           ),
           SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -41,15 +43,20 @@ class Home extends ConsumerWidget {
                 (context, index) =>
                     HomeCard(pokemon: state.data.results![index]),
                 childCount: state.data.results?.length ?? 0,
-              )),
-          SliverToBoxAdapter(child: Visibility(
-            visible: state.errorMsg != '',
-            child: Center(child: Text('${state.errorMsg}', style: TextStyle(fontSize: 20))),
-          ),)
+              )
+          ),
+
+          SliverToBoxAdapter(
+            child: Visibility(
+              visible: state.errorMsg != '',
+              child: Center(
+                  child: Text('${state.errorMsg}',
+                      style: TextStyle(fontSize: 20))),
+            ),
+          )
         ],
       ),
-      floatingActionButton:
-         FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         child: state.status == HomeStatus.loadMore
             ? const CircularProgressIndicator(color: Colors.greenAccent)
             : Icon(Icons.arrow_upward),

@@ -13,6 +13,7 @@ class HomeProvider extends StateNotifier<HomeState> {
   int limit = 20;
 
   void getPokemonsList() async {
+    if (state.status == HomeStatus.loadMore) return;
     try {
       state = state.Update(status: HomeStatus.loadMore);
 

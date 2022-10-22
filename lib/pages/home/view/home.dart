@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,15 +44,21 @@ class Home extends ConsumerWidget {
                 (context, index) =>
                     HomeCard(pokemon: state.data.results![index]),
                 childCount: state.data.results?.length ?? 0,
-              )
-          ),
-
+              )),
           SliverToBoxAdapter(
             child: Visibility(
               visible: state.errorMsg != '',
               child: Center(
-                  child: Text('${state.errorMsg}',
-                      style: TextStyle(fontSize: 20))),
+                  child: Text(state.errorMsg,
+                      style: const TextStyle(fontSize: 20))),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Visibility(
+              visible: state.status == HomeStatus.loadMore,
+              child: const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
             ),
           )
         ],
@@ -59,7 +66,7 @@ class Home extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: state.status == HomeStatus.loadMore
             ? const CircularProgressIndicator(color: Colors.greenAccent)
-            : Icon(Icons.arrow_upward),
+            : const Icon(Icons.arrow_upward),
         onPressed: () {
           _scrollController.jumpTo(0);
         },

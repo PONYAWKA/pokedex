@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,26 +13,39 @@ class DetailsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final details = ref.watch(detailsProvider(pokemon.name!));
+    var details = ref.watch(detailsProvider(pokemon.name!));
 
     return Scaffold(
         body: CustomScrollView(
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       slivers: [
         SliverAppBar(
           title: Text(pokemon.name!.toUpperCase()),
           centerTitle: true,
           backgroundColor: Colors.green,
         ),
+        CupertinoSliverRefreshControl(
+          onRefresh: () async {
+            ref.refresh(detailsProvider(pokemon.name!));
+            print('reg!');
+            await Future.delayed(Duration(seconds: 1));
+          },
+        ),
         SliverToBoxAdapter(
-          child: Hero(
-              tag: "${pokemon.name}",
+            child: Hero(
+          tag: "${pokemon.name}",
+          child: Container(
+              constraints: const BoxConstraints(
+                minHeight: 400,
+              ),
               child: CachedNetworkImage(
                 imageUrl: pokemon.getImageUrl,
-              errorWidget: (_, url,e) => const Center(
+                errorWidget: (_, url, e) => const Center(
                   child: Icon(Icons.image_not_supported),
                 ),
               )),
-        ),
+        )),
         details.when(data: (data) {
           return SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -98,7 +112,13 @@ class DetailsPage extends ConsumerWidget {
           );
         }, error: (err, _) {
           return SliverToBoxAdapter(
-            child: Text(err.toString()),
+            child: Center(
+                child: Chip(
+                    label: Text(
+              err.toString(),
+              style: const TextStyle(fontSize: 20, color: Colors.red),
+              textAlign: TextAlign.center,
+            ))),
           );
         }, loading: () {
           return const SliverToBoxAdapter(

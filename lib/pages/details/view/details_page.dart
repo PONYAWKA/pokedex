@@ -77,7 +77,7 @@ class DetailsPage extends ConsumerWidget {
                           color: Colors.greenAccent,
                           child: Center(
                             child: Text(
-                              'weight:\n${data.weight! / 10} Kg',
+                              'Weight:\n${data.weight! / 10} Kg',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 20,
@@ -95,7 +95,7 @@ class DetailsPage extends ConsumerWidget {
                           color: Colors.greenAccent,
                           child: Center(
                             child: Text(
-                              'weight:\n${data.weight! / 10} Kg',
+                              'Height:\n${data.height! * 10} cm',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 20,

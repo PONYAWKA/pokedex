@@ -9,7 +9,6 @@ abstract class AbstractPokedexApi {
   Future<PokemonResponse> getPokemonList({int? offset, int? limit});
 }
 
-
 class PokedexApi implements AbstractPokedexApi {
   final Dio _dio = Dio()
     ..options.baseUrl = 'http://pokeapi.co/api/v2'
@@ -27,8 +26,7 @@ class PokedexApi implements AbstractPokedexApi {
         return PokemonDetails.fromJson(response.data);
       }
       throw Exception('error getting pokemon Details');
-    } on DioError catch (e) {
-      print(e.message);
+    } on DioError {
       throw Exception('error getting pokemon Details');
     }
   }
@@ -42,8 +40,7 @@ class PokedexApi implements AbstractPokedexApi {
         return PokemonResponse.fromJson(response.data);
       }
       throw Exception('error getting pokemon list');
-    } on DioError catch (e) {
-      print(e.message);
+    } on DioError {
       throw Exception('error getting pokemon list');
     }
   }

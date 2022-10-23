@@ -3,5 +3,5 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:pokedex/pages/home/view/home.dart';
 
-void main() => runApp(ProviderScope(child: MaterialApp(home: Home())));
+void main() => runApp(ProviderScope(child: MaterialApp(home: Home(), debugShowCheckedModeBanner: false,)));
 

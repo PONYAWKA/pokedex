@@ -4,13 +4,20 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:dio/dio.dart';
 import 'package:pokedex/core/core.dart';
 
-class PokedexApi {
+abstract class AbstractPokedexApi {
+  Future<PokemonDetails> getPokemonDetails(String pokemonName);
+  Future<PokemonResponse> getPokemonList({int? offset, int? limit});
+}
+
+
+class PokedexApi implements AbstractPokedexApi {
   final Dio _dio = Dio()
     ..options.baseUrl = 'http://pokeapi.co/api/v2'
     ..interceptors.add(
         DioCacheManager(CacheConfig(baseUrl: "http://pokeapi.co/api/v2"))
             .interceptor);
 
+  @override
   Future<PokemonDetails> getPokemonDetails(String pokemonName) async {
     try {
       final response = await _dio.get('/pokemon/$pokemonName',
@@ -25,7 +32,7 @@ class PokedexApi {
       throw Exception('error getting pokemon Details');
     }
   }
-
+  @override
   Future<PokemonResponse> getPokemonList({int? offset, int? limit}) async {
     try {
       final response = await _dio.get('/pokemon?limit=$limit&offset=$offset',

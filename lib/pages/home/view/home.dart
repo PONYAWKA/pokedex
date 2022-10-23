@@ -30,7 +30,7 @@ class Home extends ConsumerWidget {
         slivers: [
           SliverAppBar(
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset('lib/asset/images/Logo.png'),
+              background: Image.asset('lib/assets/images/Logo.png'),
             ),
             floating: true,
             backgroundColor: Colors.green,

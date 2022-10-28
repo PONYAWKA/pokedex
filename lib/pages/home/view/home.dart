@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:pokedex/pages/home/provider/home_provider.dart';
 import 'package:pokedex/pages/home/provider/home_state.dart';
 import 'package:pokedex/pages/home/widgets/home_card.dart';

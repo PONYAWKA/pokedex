@@ -23,7 +23,6 @@ class PokemonDetails {
         : null,
   );
 
-
   final int? id;
   final String? name;
   final int? height;

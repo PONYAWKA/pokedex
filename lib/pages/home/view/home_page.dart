@@ -5,8 +5,8 @@ import 'package:pokedex/pages/home/provider/home_provider.dart';
 import 'package:pokedex/pages/home/provider/home_state.dart';
 import 'package:pokedex/pages/home/widgets/home_card.dart';
 
-class Home extends ConsumerWidget {
-  Home({super.key});
+class HomePage extends ConsumerWidget {
+  HomePage({super.key});
 
   final ScrollController _scrollController = ScrollController();
 

@@ -1,5 +1,6 @@
 import 'package:pokedex/core/core.dart';
 import 'package:pokedex/core/extentions/pokemon_respons_extantion.dart';
+import 'package:pokedex/core/repositories/pokedex_repository.dart';
 import 'package:pokedex/pages/home/provider/home_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +17,7 @@ class HomeProvider extends StateNotifier<HomeState> {
     try {
       state = state.Update(status: HomeStatus.loadMore);
       PokemonResponse response =
-          await PokedexApi().getPokemonList(offset: state.offset);
+          await PokedexRepository().getPokemonList(offset: state.offset);
       state = state.Update(
           data: state.data.append(response),
           status: HomeStatus.success,
@@ -33,7 +34,7 @@ class HomeProvider extends StateNotifier<HomeState> {
     if (state.status == HomeStatus.loadMore) return;
     try {
       state = state.Update(status: HomeStatus.loading);
-      PokemonResponse response = await PokedexApi().getPokemonList(limit: limit);
+      PokemonResponse response = await PokedexRepository().getPokemonList(limit: limit);
       state = state.Update(
         data: response,
         status: HomeStatus.success,

@@ -28,7 +28,6 @@ class DetailsPage extends ConsumerWidget {
         CupertinoSliverRefreshControl(
           onRefresh: () async {
             ref.refresh(detailsProvider(pokemon.name!));
-            print('reg!');
             await Future.delayed(Duration(seconds: 1));
           },
         ),

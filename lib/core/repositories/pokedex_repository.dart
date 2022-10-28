@@ -5,15 +5,17 @@ abstract class AbstractPokedexRepository{
   Future<PokemonDetails> getPokemonDetails(String pokemonName);
 }
 
-class PokedexRepository implements AbstractPokedexApi
+class PokedexRepository implements AbstractPokedexRepository
 {
-  PokedexRepository({PokedexApi? pokedexApi})
-      : _pokedexApi = pokedexApi ?? PokedexApi();
+  PokedexRepository({required pokedexApi})
+      : _pokedexApi = pokedexApi;
 
   final PokedexApi _pokedexApi;
-    Future<PokemonResponse> getPokemonList({int? offset, int? limit}){
+    @override
+  Future<PokemonResponse> getPokemonList({int? offset, int? limit}){
       return _pokedexApi.getPokemonList(offset: offset, limit: limit );
     }
+  @override
   Future<PokemonDetails> getPokemonDetails(String pokemonName){
     return _pokedexApi.getPokemonDetails(pokemonName);
   }

@@ -1,2 +1,2 @@
 export 'capitalize.dart';
-export 'package:synchronized/extension.dart';
+export 'pokemon_respons_extantion.dart';

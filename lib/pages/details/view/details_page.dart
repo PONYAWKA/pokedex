@@ -7,7 +7,7 @@ import 'package:pokedex/core/core.dart';
 import 'package:pokedex/pages/details/provider/details_provider.dart';
 
 class DetailsPage extends ConsumerWidget {
-  DetailsPage({super.key, required this.pokemon});
+  const DetailsPage({super.key, required this.pokemon});
 
   final Pokemon pokemon;
 
@@ -28,7 +28,7 @@ class DetailsPage extends ConsumerWidget {
         CupertinoSliverRefreshControl(
           onRefresh: () async {
             ref.refresh(detailsProvider(pokemon.name!));
-            await Future.delayed(Duration(seconds: 1));
+            await Future.delayed(const Duration(seconds: 1));
           },
         ),
         SliverToBoxAdapter(

@@ -29,7 +29,7 @@ class HomeProvider extends StateNotifier<HomeState> {
     }
   }
 
-  void UpdatePokemonList() async {
+  void updatePokemonList() async {
     if (state.status == HomeStatus.loadMore) return;
     try {
       state = state.Update(status: HomeStatus.loading);
